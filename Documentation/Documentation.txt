@@ -1,0 +1,14 @@
+The following details must be mentioned in the project documentation file. You can add additional details in the documentation if you want to. 
+
+Abstract
+
+Introduction
+
+Overall Description [software requirement, hardware requirement, functional requirements, non-functional requirements]
+
+Proposed System
+
+Research Section [Brief summary about 2 different research paper related to your project domain]
+
+References
+
