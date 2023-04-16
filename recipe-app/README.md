@@ -2,7 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Install npm. If on a debian based distro, use the following command
+
+```
+sudo apt install npm
+```
+
+Once you're in the project run
+
+```
+npm install 
+```
+
+Now run the development server:
 
 ```bash
 npm run dev
