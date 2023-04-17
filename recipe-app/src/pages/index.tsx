@@ -24,7 +24,7 @@ export default function Home() {
             recipes are accompanied by detailed nutritional information, so you
             can make informed decisions about your meals.
           </p>
-          <Link href="/recipes">
+          <Link href="/recipes/preferences">
             <div className="px-3 py-2 bg-green-700 flex justify-center rounded-md mt-5 hover:bg-green-800">
               <span className="text-white text-xl">View Recipes →</span>
             </div>
