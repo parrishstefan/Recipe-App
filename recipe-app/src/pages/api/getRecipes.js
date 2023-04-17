@@ -12,7 +12,6 @@ export default async function handler(req, res) {
       .json({ message: "Unprocessable Entity: missing tags" });
   }
 
-  console.log("lol")
   console.log(`https://api.spoonacular.com/recipes/complexSearch?number=15&intolerances=${req.body.allergies}&diet=${req.body.diet}&apiKey=f608c0ffdab04920b1cd30e96c569b2c`)
 
   if (req.body.isEmpty !== "none") {
@@ -20,15 +19,21 @@ export default async function handler(req, res) {
       `https://api.spoonacular.com/recipes/complexSearch?number=15&intolerances=${req.body.allergies}&diet=${req.body.diet}&apiKey=f608c0ffdab04920b1cd30e96c569b2c`
     );
     const data = await response.json();
+    data.recipes = data.results
+    delete data.results
+
+    console.log(data)
     return res.status(200).json(data);
   } else {
     const response = await fetch(
-      `https://api.spoonacular.com/recipes/random?number=15&apiKey=f608c0ffdab04920b1cd30e96c569b2c`
+      `https://api.spoonacular.com/recipes/random?number=2&apiKey=f608c0ffdab04920b1cd30e96c569b2c`
     );
     const data = await response.json();
     return res.status(200).json(data);
   }
 }
+
+
 //! --------------------------------------
 
 // // Return an example response to save api calls
