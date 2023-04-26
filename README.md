@@ -4,8 +4,8 @@
 
 ```
 Name: Stefan Parrish
-Email:
-CWID:
+Email: parrishstefan@csu.fullerton.edu
+CWID: 887926392
 ```
 
 ```
