@@ -3,6 +3,8 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 
+console.log(process.env.TEST);
+
 type Nutrient = {
   name: string;
   amount: number;
