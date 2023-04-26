@@ -13,9 +13,10 @@ type RecipeInfoProps = {
   id: number;
   title: string;
   image: string;
-  nutrition: {
+  nutrition?: {
     nutrients: Nutrient[];
   };
+  sourceUrl?: string;
 };
 
 export default function RecipeInfo({
@@ -28,7 +29,9 @@ export default function RecipeInfo({
     window.localStorage.getItem("likes")?.includes(id.toString())
   );
 
-  function handleLike() {
+  async function handleLike() {
+    const toastId = toast.loading("One moment please...");
+
     // if already liked, remove from likes
     if (liked) {
       setLiked(false);
@@ -36,29 +39,40 @@ export default function RecipeInfo({
       let currentLikes = localStorage.getItem("likes");
       if (currentLikes) {
         let likes = JSON.parse(currentLikes);
-        let newLikes = likes.filter((like: number) => like !== id);
+        let newLikes = likes.filter((recipe: any) => recipe.id !== id);
         localStorage.setItem("likes", JSON.stringify(newLikes));
       }
-      toast.success("Recipe removed from favorites!");
+      toast.success("Recipe removed from favorites!", { id: toastId });
       return;
     }
 
+    // handle recipes not yet liked
     setLiked(true);
+    // fetch the sourceURL for the current ID
+    let data = await fetch(
+      `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=f608c0ffdab04920b1cd30e96c569b2c`
+    );
+
+    let recipe = await data.json();
+    let sourceUrl = recipe.sourceUrl;
+    let currentRecipe = {
+      id,
+      title,
+      image,
+      sourceUrl,
+    };
+
     let currentLikes = localStorage.getItem("likes");
 
     // add the id to the likes array in local storage
     if (currentLikes) {
       let likes = JSON.parse(currentLikes);
-      likes.push(id);
+      likes.push(currentRecipe);
       localStorage.setItem("likes", JSON.stringify(likes));
     } else {
-      localStorage.setItem("likes", JSON.stringify([id]));
+      localStorage.setItem("likes", JSON.stringify([currentRecipe]));
     }
-    toast.success("Recipe added to favorites!");
-
-    // TODO: can add more information using the endpoint: https://spoonacular.com/food-api/docs#Get-Recipe-Information
-    // TODO: possibly just need a the sourceUrl to let the user view the recipe on the website
-    // TODO: make a fetch request to the endpoint above with the ID and save an object of the recipe in local storage array
+    toast.success("Recipe added to favorites!", { id: toastId });
   }
 
   return (
@@ -76,10 +90,16 @@ export default function RecipeInfo({
       <div className="flex flex-col justify-center space-y-4 w-full overflow-hidden">
         <div className="space-y-2">
           <p className="text-xl font-bold truncate">{title}</p>
-          <p className="text-lg truncate">
-            {nutrition.nutrients[0].amount}kcal, {nutrition.nutrients[1].amount}
-            g
-          </p>
+
+          {
+            // if nutrition is not defined, then don't render the nutrition info
+            nutrition && (
+              <p className="text-lg truncate">
+                {nutrition.nutrients[0].amount}kcal,{" "}
+                {nutrition.nutrients[1].amount}g
+              </p>
+            )
+          }
         </div>
       </div>
       <div className="flex items-center">
