@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import Link from "next/link";
 import Head from "next/head";
-import { useState } from "react";
 import Selection from "@/components/Selection";
 
 const all_intolerances = [
@@ -31,7 +32,7 @@ export default function Preferences() {
   const [intolerances, setIntolerances] = useState<string[]>([]);
   const [diet, setDiet] = useState<string[]>([]);
   const [minProtein, setMinProtein] = useState("0");
-  const [maxProtein, setMaxProtein] = useState("100");
+  const [maxProtein, setMaxProtein] = useState("1000");
   const [minCalories, setMinCalories] = useState("0");
   const [maxCalories, setMaxCalories] = useState("2500");
 
@@ -58,7 +59,7 @@ export default function Preferences() {
               type="range"
               min="0"
               defaultValue={"0"}
-              max="100"
+              max="1000"
               step={"5"}
               className="w-full"
               onChange={(e) => {
@@ -72,8 +73,8 @@ export default function Preferences() {
             <input
               type="range"
               min="0"
-              defaultValue={"100"}
-              max="100"
+              defaultValue={"1000"}
+              max="1000"
               step={"5"}
               className="w-full"
               onChange={(e) => {
