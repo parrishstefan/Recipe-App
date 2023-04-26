@@ -1,7 +1,5 @@
 # Final-Project
 
-Add the following details to the **README.md** file
-
 ## A. Members
 
 ```
@@ -23,6 +21,10 @@ CWID: 893335109
 ```
 
 ## B. Description of our App
+
+```
+This app, made with Next.js, lets users search for recipes by ingredient, cuisine, or dietary preference using Spoonacular API. Users can save favorite recipes and access them later. The app has an intuitive interface and is quick to load.
+```
 
 ## C. How to run the app
 
