@@ -35,7 +35,15 @@ sudo apt install npm
 Once you're in the project run
 
 ```
-npm install 
+npm install
+```
+
+You may need to upgrade node so use n module from npm
+
+```
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
 ```
 
 Now run the development server:
