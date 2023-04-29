@@ -3,7 +3,10 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 
-console.log(process.env.TEST);
+// import { config } from 'dotenv';
+// config();
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 type Nutrient = {
   name: string;
@@ -52,7 +55,7 @@ export default function RecipeInfo({
     setLiked(true);
     // fetch the sourceURL for the current ID
     let data = await fetch(
-      `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=f608c0ffdab04920b1cd30e96c569b2c`
+      `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${API_KEY}`
     );
 
     let recipe = await data.json();
